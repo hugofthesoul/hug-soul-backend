@@ -1,6 +1,13 @@
 # Getting Started
 
-# Deployment to AWS
+### Install lombok
+For eclipse: Just download the Jar-File (version 1.18.12) from https://projectlombok.org and double click on it as administrator (Strg + Shift + Doubleclick), 
+then follow the instructions.
+
+For other IDEs see:
+https://projectlombok.org/setup/overview
+
+### Deployment to AWS
 Make sure, you use Java 8.
 
 Run `mvn package`.
