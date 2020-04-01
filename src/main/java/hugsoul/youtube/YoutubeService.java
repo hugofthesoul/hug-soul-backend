@@ -1,5 +1,6 @@
 package hugsoul.youtube;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +14,9 @@ public class YoutubeService {
     //TODO
     @GetMapping
     List<YoutubeResponseDTO> getVideos() {
-        return List.of(new YoutubeResponseDTO());
+        List<YoutubeResponseDTO> videos = new ArrayList<>();
+        videos.add(new YoutubeResponseDTO());
+        return videos;
     }
 
 }
