@@ -12,12 +12,15 @@ then follow the instructions.
 For other IDEs see:
 https://projectlombok.org/setup/overview
 
-### Deployment to AWS
-Make sure, you use Java 8.
+### Deployment to Heroku
+Deployments will be done on every commit to the github master branch: https://github.com/hugofthesoul/hug-soul-backend
 
-Run `mvn package`.
+### Changing the Youtube Api Key
+1. Go to https://dashboard.heroku.com/apps/hug-of-soul/settings
+2. In section Config Vars: Click the button Reveal Config Vars
+3. Edit the YOUTUBE_API_KEY (by clicking the pencil icon to the right of it)
+4. Change the value and save
 
-And upload the generated jar from the target folder to AWS Beanstalk.
 
 ### Reference Documentation
 For further reference, please consider the following sections:
