@@ -1,53 +1,63 @@
 package hugsoul.youtube;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import hugsoul.exceptions.UnsupportedCountryException;
+import lombok.Setter;
 import lombok.var;
 
 @Service
+@ConfigurationProperties
+@Setter
 public class YoutubeService {
 
     @Autowired
     RestTemplate youtubeTemplate;
-    
+
     @Value("${youtube.api.url}")
     String url;
-    
+
     @Value("${youtube.api.key}")
     String apiKey;
 
-    YoutubeApiResponse getVideos(YoutubeSearch search) {
-        var params = new HashMap<String, Object>();
-        // set invariant params ---------
+    private LinkedHashMap<String, LinkedHashMap<String, LinkedHashMap<String, String>>> playlistMap;
+
+    Object getVideos(YoutubeSearch search) throws UnsupportedCountryException {
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url)
             .queryParam("key", apiKey)
-            .queryParam("part", "id")
-            .queryParam("order", "date")
-            .queryParam("safeSearch", "strict")
-            .queryParam("type", "video")
-            .queryParam("videoDuration", "short")
-            .queryParam("videoEmbeddable", "true");
-        // set params based on the search param ---------
-        // TODO:now either derive from country or additional search param
-        builder.queryParam("relevanceLanguage", "en");
-        // TODO map category to query
-        builder.queryParam("q", search.getCategory());
-        builder.queryParam("regionCode", search.getRegionCode());
-        // dynamic params
-        builder.queryParam("maxResults", search.getMaxResults());
+            .queryParam("part", "snippet")
+            .queryParam("playlistId", getPlaylistId(search))
+            .queryParam("maxResults", search.getMaxResults());
         if (search.getPageToken() != null) {
             builder.queryParam("pageToken", search.getPageToken());
         }
-        
-        YoutubeApiResponse apiResponse = youtubeTemplate.getForObject(builder.toUriString(),
-                YoutubeApiResponse.class, params);
-        // TODO: maybe do some processing here
-        return apiResponse;
+        return youtubeTemplate.getForObject(builder.toUriString(), Object.class);
+    }
+
+    private String getPlaylistId(YoutubeSearch search) throws UnsupportedCountryException {
+        var categoryMap = playlistMap.get(search.getCategory());
+        if (categoryMap == null) {
+            throw new UnsupportedCountryException("Category not found: " + search.getCategory());
+        }
+        var countryMap = categoryMap.get(search.getCountryCode());
+        if (countryMap == null) {
+            throw new UnsupportedCountryException(
+                    String.format("Unsupported country: %s for category: %s", search.getCountryCode(), search.getCategory()));
+        }
+        if (search.getLanguageCode() != null) {
+            String result = countryMap.get(search.getLanguageCode());
+            if (result != null) {
+                return result;
+            }
+        }
+        return countryMap.values().iterator().next();
     }
 }

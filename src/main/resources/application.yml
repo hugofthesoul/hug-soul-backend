@@ -1,0 +1,59 @@
+# server.port: 443
+youtube.api.url: https://www.googleapis.com/youtube/v3/playlistItems
+# set this to a valid key, will be read from environment variable on AWS
+youtube.api.key:
+
+playlist-map:
+  doctors:
+     bo:
+       es: PL5mYTKE8HUNn8mJ0bxN3WdOO9fmOyTf3f
+     ca:
+       en: PL5mYTKE8HUNkDSL9KQ3yUphQ0K62aAxY1
+     de:
+       de: PL5mYTKE8HUNlxP9t0CxuKg7Pum4_XzWy7
+     gb:
+       en: PL5mYTKE8HUNkGPJ4Yse7QTICCH3BOwe-V
+     in:
+       en: PL5mYTKE8HUNlua0ZldHECtFyfPqw_kzuS
+     us:
+       en: PL5mYTKE8HUNlnWFiiX-6uM9psha9ygDdn
+  gratitude:
+     bo:
+       es: PL5mYTKE8HUNmOf27exOdoDf6KVVhJubIz
+     ca:
+       en: PL5mYTKE8HUNkR-pohUg51O-WH3uzFfBhZ
+     de:
+       de: PL5mYTKE8HUNlq7mCmePjwfzcPO_MbKYfC
+     gb:
+       en: PL5mYTKE8HUNlNrsi8h8ObutO0VVrncXXn
+     in:
+       en: PL5mYTKE8HUNmUEX8dz4rhATG6qaOd6HIY
+     us:
+       en: PL5mYTKE8HUNmwXKko31rnSsxKqDxpZ6d_
+  kindness:
+     bo:
+       es: PL5mYTKE8HUNnNP84tWV1QrNgEuRE4TCbm
+     ca:
+       en: PL5mYTKE8HUNlTGI43FQN_MuKs7Bnu8kZY
+     de:
+       de: PL5mYTKE8HUNk5TmWjSw6g4HYjc2JqGhK7
+     gb:
+       en: PL5mYTKE8HUNkzYgCeki8fbupQ_S3HGEv8
+     in:
+       en: PL5mYTKE8HUNlN7XqY3DSJZEwrHA0hl5WT
+     us:
+       en: PL5mYTKE8HUNn0OjMSyBD7m4ZjOWZFRWHn
+  miracles:
+     bo:
+       es: PL5mYTKE8HUNlcv88r2gMbH6gCPVoGxlzj
+     ca:
+       en: PL5mYTKE8HUNm8L_Obx6LSkyNf-LU18jqA
+     de:
+       de: PL5mYTKE8HUNkwYCyP6-mUBk3ZFMtXuxcv
+     gb:
+       en: PL5mYTKE8HUNk2tWN0BNfqZm-ljhMvQ_Gi
+     in:
+       en: PL5mYTKE8HUNkhV1Ss6V57FS17vl0J2kjQ
+     us:
+       en: PL5mYTKE8HUNn6oZv7yt3va1E8pYnd1VYg
+   

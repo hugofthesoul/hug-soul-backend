@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import hugsoul.exceptions.UnsupportedCountryException;
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/videos")
@@ -17,7 +19,7 @@ public class YoutubeController {
     YoutubeService youtubeService;
 
     @GetMapping
-    YoutubeApiResponse getVideos(@Valid YoutubeSearch search) {
+    Object getVideos(@Valid YoutubeSearch search) throws UnsupportedCountryException {
        return youtubeService.getVideos(search);
     }
 
