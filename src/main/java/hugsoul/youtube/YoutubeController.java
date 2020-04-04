@@ -22,5 +22,4 @@ public class YoutubeController {
     Object getVideos(@Valid YoutubeSearch search) throws UnsupportedCountryException {
        return youtubeService.getVideos(search);
     }
-
 }
